@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 from argon2 import PasswordHasher
 from fastapi import Depends, FastAPI, Header, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from app.config import ENVIRONMENT
@@ -25,6 +26,16 @@ from app.services.ai import generate_daily_summary, safe_ai_response
 
 ph = PasswordHasher()
 app = FastAPI(title="CareBridge AI API", version="0.1.0", description="Demo backend for the CareBridge AI elderly care coordination platform.")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 Base.metadata.create_all(bind=engine)
 
