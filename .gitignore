@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.env
+.venv/
+__pycache__/
+*.pyc
+backend/carebridge.db
+frontend/.next
+backend/.pytest_cache
+backend/.venv
